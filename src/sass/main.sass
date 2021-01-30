@@ -1,0 +1,65 @@
+*
+    margin: 0
+    padding: 0
+html
+    height: 100%
+    width: 100%
+    font:
+        family: Helvetica, Arial, sans-serif
+        size: 18px
+        weight: 300
+        style: normal
+    color: #3D3D3D
+    line-height: 21px
+body
+    height: 100%
+    width: 100%
+.wrapper
+    width: 100%
+    max-width: 1440px
+    height: 1643px
+    margin: 0 auto
+    display: flex
+    flex-direction: column
+    flex-wrap: wrap
+    box-sizing: border-box
+.background
+    z-index: 0
+    width: 100%
+    height: 1643px
+    max-width: 1440px
+    margin: -1643px auto
+    background: linear-gradient(to top,  #ffffff 0, #ffffff 1127px, #3d3d3d 1127px)
+    display: flex
+    flex-direction: column
+    &__logo        
+        height: auto
+        width: auto
+        font-weight: bold
+        font-size: 144px
+        line-height: 144px
+        padding-top: 398px
+        padding-left: 22px
+        margin-bottom: 45px
+        &_white
+            width: 470px
+            color: #FFFFFF            
+        &_brown
+            width: 490px
+            margin-left: 451px
+            margin-top: -44px
+    &__squares
+        height: 450px
+        width: 100%
+        &_wide
+            width: 298px
+            height: 293px
+            margin-left: 499px
+            margin-top: 0px;    
+            border: 20px solid #F9F9F9
+        &_narrow
+            width: 318px
+            height: 332px
+            margin-left: 600px
+            margin-top: -150px
+            border: 10px solid #F9F9F9
