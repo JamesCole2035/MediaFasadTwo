@@ -1,0 +1,35 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        block title
+        title= pageTitle 
+        for file in ["./css/reset.css","./css/styles.min.css"]
+            link(rel="stylesheet" href= file)
+    body
+        .wrapper#wrapper
+            header.header
+                .logo
+                    .logo__back
+                    .logo__text
+                        p.logo__text_one Media
+                        p.logo__text_two Fasad
+                    .logo__border_wide
+                    .logo__border_narrow
+                nav.menu#menu
+                    li.menu__item
+                        a.menu__link(href="./index.html") Home
+                    for item in ["about", "content", "contacts"]
+                        li.menu__item
+                            a.menu__link(href="./" + item + ".html")= item
+                nav.nav-mobile
+                    a#nav-toggle(href="#")
+                        span
+            main.content
+                block content                    
+            footer.footer
+                p.footer__text 2020
+        block background
+    for file in ["scripts"]
+        script(src="./js/" + file + ".min.js")

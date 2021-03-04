@@ -1,0 +1,37 @@
+extends templates/template.pug
+block content
+    .column_left
+        .banner
+            p.banner__text It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using.
+            .banner__border_wide#banner-border-wide
+            .banner__border_narrow#banner-border-narrow
+        .author
+            .author__photo#author-photo
+                img.photo(src="./img/author.png" alt="photo of Joe Mohnil")
+            .author__border_photo#author-border-photo
+            h2.author__name Joe Mohnil
+            p.author__quote “Is simply dummy text of the printing and typesetting”
+    .column_right
+        .image
+            .image__photo#image-photo
+                img.photo(src="./img/desc.png" alt="work desc")
+            .image__border#image-border-photo
+        .form
+            h2.form__title Registration
+            form(action="index.html" method="GET")
+                input.form__input#email(type="text" name="email" placeholder="EMAIL")
+                input(type="text" name="name" id="name" placeholder="NAME" class="form__input")
+                input(type="text" name="message" id="message" placeholder="MESSAGE" class="form__input")
+                input.form__button#button(type="button", value="SEND" name="button")
+block title
+    - var pageTitle = "Main page"
+    meta(name="description" content="Главная страница MediaFasad")
+    meta(name="robots" content="index, mediafasad")
+block background 
+    .background.white
+            .background__logo
+                p.background__logo_white MEDIA
+                p.background__logo_brown FASAD
+            .background__square
+                .background__square_wide#square-one
+                .background__square_narrow#square-two

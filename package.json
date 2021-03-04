@@ -1,0 +1,46 @@
+{
+  "name": "mediafasad",
+  "version": "0.0.1",
+  "description": "web pages on pug and sass&scss",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JamesCole2035/MediaFasadTwo.git"
+  },
+  "keywords": [
+    "html",
+    "css",
+    "npm",
+    "node",
+    "gulp",
+    "pug",
+    "sass",
+    "scss",
+    "js"
+  ],
+  "author": "Mikhail Bochkov jamescole2035@inbox.ru",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JamesCole2035/MediaFasadTwo/issues"
+  },
+  "homepage": "https://github.com/JamesCole2035/MediaFasadTwo#readme",
+  "devDependencies": {
+    "browser-sync": "^2.26.13",
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-cssnano": "^2.1.3",
+    "gulp-group-css-media-queries": "^1.2.2",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-pug": "^4.0.1",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-uglify": "^3.0.2",
+    "readable-stream": "^3.6.0"
+  }
+}
