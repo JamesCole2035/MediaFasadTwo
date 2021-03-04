@@ -1,0 +1,16 @@
+extends templates/template.pug
+block content
+    .column_left 
+    .column_right
+block title
+    - var pageTitle = "About"
+    meta(name="description" content="страница о нас")
+    meta(name="robots" content="index, mediafasad")
+block background
+    .background.white
+            .background__logo
+                p.background__logo_white MEDIA
+                p.background__logo_brown FASAD
+            .background__square
+                .background__square_wide#square-one
+                .background__square_narrow#square-two

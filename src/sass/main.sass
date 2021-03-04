@@ -1,3 +1,17 @@
+@mixin media($minscreen,$maxscreen,$property,$values)
+    @for $i from 1 through length($maxscreen)
+        @for $i from 1 through length($minscreen)
+            @media screen and (min-width: nth($minscreen, $i) + 'px') and (max-width: nth($maxscreen, $i) + 'px')
+                #{$property}: #{nth($values, $i)}
+@mixin border($pos,$w,$h,$bor,$l,$t)
+    position: $pos
+    left: $l
+    top: $t
+    width: $w
+    height: $h
+    border: $bor
+$grayColor: #3D3D3D
+$whiteColor: #F9F9F9
 *
     margin: 0
     padding: 0
@@ -9,57 +23,467 @@ html
         size: 18px
         weight: 300
         style: normal
-    color: #3D3D3D
+    color: $grayColor
     line-height: 21px
 body
     height: 100%
     width: 100%
 .wrapper
+    margin: 0 auto
     width: 100%
     max-width: 1440px
     height: 1643px
-    margin: 0 auto
     display: flex
     flex-direction: column
     flex-wrap: wrap
     box-sizing: border-box
 .background
-    z-index: 0
+    margin: -1643px auto
     width: 100%
     height: 1643px
     max-width: 1440px
-    margin: -1643px auto
-    background: linear-gradient(to top,  #ffffff 0, #ffffff 1127px, #3d3d3d 1127px)
     display: flex
     flex-direction: column
-    &__logo        
+    z-index: 0
+    &__logo
+        position: relative        
+        padding-top: 398px
+        padding-left: 22px
+        margin-bottom: 0px
         height: auto
         width: auto
         font-weight: bold
         font-size: 144px
         line-height: 144px
-        padding-top: 398px
-        padding-left: 22px
-        margin-bottom: 45px
+        @include media($minscreen: (320), $maxscreen: (479), $property: 'font-size',$values: (80px))
+        @include media($minscreen: (320), $maxscreen: (479), $property: 'line-height',$values: (80px))
+        @include media($minscreen: (320,480), $maxscreen: (479,994), $property: 'padding-top',$values: (349px,298px))
         &_white
+            position: relative
             width: 470px
-            color: #FFFFFF            
+            color: #FFFFFF
+            @include media($minscreen: (320),$maxscreen: (479),$property: 'width',$values: (260px))  
+            @include media($minscreen: (320,480),$maxscreen: (479,994),$property: 'left',$values: (calc((100% - 278px)/2),calc((100% - 510px)/2)))     
         &_brown
+            position: relative            
             width: 490px
-            margin-left: 451px
-            margin-top: -44px
-    &__squares
-        height: 450px
+            left: 451px
+            top: -45px
+            @include media($minscreen: (320), $maxscreen: (479),$property: 'top',$values: (-22px))
+            @include media($minscreen: (320,480),$maxscreen: (479,994),$property: 'width',$values: (265px,470px))             
+            @include media($minscreen: (320,480,995,1024,1134,1280),$maxscreen: (479,994,1023,1133,1279,1400),$property: 'left',$values: (calc((100% - 280px)/2),calc((100% - 512px)/2),calc((100%-473px)/5),calc((100% - 600px)/2.15),calc((100% - 600px)/2),340px))
+    &__square
+        display: block
+        height: 540px
         width: 100%
+        @include media($minscreen: (320),$maxscreen: (599),$property: 'display',$values: (none))        
         &_wide
-            width: 298px
-            height: 293px
-            margin-left: 499px
-            margin-top: 0px;    
-            border: 20px solid #F9F9F9
+            @include border($pos: relative,$w: 298px,$h: 293px,$bor: 20px solid $whiteColor,$l: 500px,$t: 0px)
+            @include media($minscreen: (600),$maxscreen: (1439),$property: 'left',$values: (calc((100% - 515px)/2)))       
         &_narrow
-            width: 318px
-            height: 332px
-            margin-left: 600px
-            margin-top: -150px
-            border: 10px solid #F9F9F9
+            @include border($pos: relative,$w: 318px,$h: 332px,$bor: 10px solid $whiteColor,$l: 601px,$t: -148px)
+            @include media($minscreen: (600),$maxscreen: (1439),$property: 'left',$values: (calc((100% - 414px)/2)))      
+.white
+    background: linear-gradient(to top,  #ffffff 0, #ffffff 1127px, $grayColor 1127px)
+    @include media($minscreen: (320),$maxscreen: (994),$property: 'background',$values: (linear-gradient(to top,  #ffffff 0, #ffffff 1227px, $grayColor 1227px)))
+.brownTop
+    background: linear-gradient(to top,  #ffffff 0, #ffffff 1523px, $grayColor 1523px)
+.brown
+    background: linear-gradient(to top,  #ffffff 0, #ffffff 120px, $grayColor 120px)
+.header
+    width: 100%
+    height: 120px
+    display: flex
+    flex-direction: row
+    flex-wrap: nowrap
+    justify-content: flex-start
+    flex: 0 0 auto
+.logo
+    position: relative
+    width: 150px
+    height: 100%
+    &__back
+        width: 72px
+        height: 49px
+        position: absolute
+        left: 42.5px
+        top: 34px
+        background: #FFFFFF
+        @include media($minscreen: (320),$maxscreen: (599),$property: 'left',$values: (20px))        
+    &__text
+        width: 60px
+        height: 28px
+        position: absolute
+        left: 54.5px
+        top: 47px
+        font-size: 15px
+        line-height: 17px
+        color: #000000
+        z-index: 10
+        @include media($minscreen: (320),$maxscreen: (599),$property: 'left',$values: (32px)) 
+        &_one      
+        &_two
+            position: absolute
+            top: 10px
+            left: 17.5px
+    &__border_wide
+        @include border($pos: absolute,$w: 59px,$h: 34px,$bor: 6px solid #BDBDBD,$l: 48px,$t: 47px)
+        @include media($minscreen: (320),$maxscreen: (599),$property: 'left',$values: (25.5px)) 
+    &__border_narrow
+        @include border($pos: absolute,$w: 30px,$h: 18px,$bor: 2px solid #BDBDBD,$l: 98px,$t: 75px)
+        @include media($minscreen: (320),$maxscreen: (599),$property: 'left',$values: (75.5px)) 
+.menu
+    width: calc(100% - 150px)
+    display: flex
+    flex-direction: row
+    flex-wrap: nowrap
+    justify-content: flex-start
+    z-index: 10
+    @include media($minscreen: (320),$maxscreen: (599),$property: 'display',$values: (none !important))
+    &__item
+        height: 17px
+        width: auto
+        position: relative
+        list-style: none
+        padding-top: 53px
+        @include media($minscreen: (320),$maxscreen: (599),$property: 'padding-top',$values: (10px))
+        &:first-child
+            padding-left: 29px
+            @include media($minscreen: (320,600,768),$maxscreen: (599,767,994),$property: 'padding-left',$values: (10px,0,0))//одинаковое
+        &:nth-child(2)
+            padding-left: 85px
+            @include media($minscreen: (320,600,768),$maxscreen: (599,767,994),$property: 'padding-left',$values: (10px,22px,5%))  
+        &:nth-child(3)
+            padding-left: 81px
+            @include media($minscreen: (320,600,768),$maxscreen: (599,767,994),$property: 'padding-left',$values: (10px,20px,5%))  
+        &:last-child
+            padding-left: 97px
+            @include media($minscreen: (320,600,768),$maxscreen: (599,767,994),$property: 'padding-left',$values: (10px,25px,7.5%)) 
+        &:hover .menu__link
+           border-bottom: 1px solid white 
+    &__link
+        padding: 0 3px
+        line-height: 21px
+        text-transform: uppercase
+        text-decoration: none
+        color: #FFFFFF
+.nav-mobile
+    display: none
+    position: absolute
+    right: 0
+    top: 20px
+    background: none
+    margin: auto
+    height: 80px
+    width: 75px
+    z-index: 25
+    @include media($minscreen: (320),$maxscreen: (599),$property: 'display',$values: (block))
+#nav-toggle
+	position: absolute
+	left: 20px
+	top: 27px
+    cursor: pointer
+    padding: 10px 35px 16px 0px
+#nav-toggle span, #nav-toggle span:before, #nav-toggle span:after
+    cursor: pointer
+    border-radius: 1px
+    height: 5px
+    width: 35px
+    background: #ffffff
+    position: absolute
+    display: block
+    content: ""
+    transition: all 300ms ease-in-out
+#nav-toggle span:before
+    top: -10px
+#nav-toggle span:after
+    bottom: -10px
+#nav-toggle.active span
+    background-color: transparent
+#nav-toggle.active span:before, #nav-toggle.active span:after
+    top: 0
+#nav-toggle.active span:before
+    transform: rotate(45deg)
+#nav-toggle.active span:after
+    transform: rotate(-45deg)
+.menu-show
+    position: absolute
+    top: 100px
+    right: 2px
+    z-index: 25
+    width: 150px
+    height: 118px
+    display: flex
+    flex-direction: column
+    flex-wrap: nowrap
+    justify-content: flex-start
+    background-color: $grayColor
+    border: 1px solid #BDBDBD
+.in
+    animation-name: moveLeft
+    animation-duration: 1s
+    animation: moveLeft 1s ease-in-out
+.out
+	animation-name: moveRight
+	animation-duration: 1s
+	animation: moveRight 1s ease-in-out
+@keyframes moveRight
+    0%
+        opacity: 0
+        transform: translateX(2px)
+        -ms-transform: translateX(2px)
+    100%
+        opacity: 1
+        transform: translateX(152px)
+        -ms-transform: translateX(152px)
+@keyframes moveLeft
+    0%
+        opacity: 0
+        transform: translateX(152px)
+        -ms-transform: translateX(152px)
+    100%
+        opacity: 1
+        transform: translateX(2px)
+        -ms-transform: translateX(2px)
+.content
+    width: 100%
+    height: auto
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    box-sizing: border-box
+    justify-content: space-between
+    z-index: 10
+.column
+    width: 100%
+    height: 1423px
+    min-width: 320px
+.column_left
+    height: 1423px
+    min-width: 480px
+    flex-grow: 5.65
+    @include media($minscreen: (320),$maxscreen: (479),$property: 'min-width',$values: (320px))    
+    @include media($minscreen: (320), $maxscreen: (994),$property: 'height',$values: (893px))
+.column_right
+    height: 1423px
+    min-width: 500px
+    flex-grow: 1
+    @include media($minscreen: (320),$maxscreen: (479),$property: 'min-width',$values: (320px))
+    @include media($minscreen: (320), $maxscreen: (994),$property: 'height',$values: (530px))
+.banner    
+    position: relative
+    height: 260px
+    margin-bottom: 338px
+    max-width: 800px
+    width: auto
+    @include media($minscreen: (320),$maxscreen: (994),$property: 'margin-bottom',$values: (150px)) 
+    //background-color: red
+    &__text
+        max-width: 650px
+        height: 151px
+        position: absolute
+        top: 54px
+        left: 128px
+        font-size: 25px
+        color: #D1D1D1
+        line-height: 29px
+        @include media($minscreen: (320,480,600,995,1200),$maxscreen: (479,599,994,1199,1333),$property: 'font-size',$values: (14px,14px,18px,20px,22px))
+        @include media($minscreen: (320,480,600,995,1200),$maxscreen: (479,599,994,1199,1333),$property: 'line-height',$values: (16px,16px,21px,23px,26px))
+        @include media($minscreen: (320,480,995),$maxscreen: (479,994,1333),$property: 'left',$values: (30px,10%,15%))
+        @include media($minscreen: (320,480,600,995,1024,1134,1280),$maxscreen: (479,599,994,1023,1133,1279,1333),$property: 'width',$values: (260px,360px,460px,110%,106%,90%,84%))
+        @include media($minscreen: (320,480,600,995,1200),$maxscreen: (479,599,994,1199,1333),$property: 'height',$values: (auto,83px,109px,120px,135px))
+        @include media($minscreen: (320,480),$maxscreen: (479,994),$property: 'top',$values: (46px,16px))        
+    &__border_narrow
+        @include border($pos: absolute,$w: 641px,$h: 159px,$bor: 1px solid #FFFFFF,$l: 146px,$t: 73px)
+        @include media($minscreen: (320,480,995),$maxscreen: (479,994,1333),$property: 'left',$values: (22px,12.5%,18%))
+        @include media($minscreen: (480),$maxscreen: (994),$property: 'top',$values: (42px))       
+        @include media($minscreen: (320,480,600,1200,1134,960),$maxscreen: (479,599,994,1333,1199,1134),$property: 'width',$values: (280px,365px,466px,555px,505px,495px))
+        @include media($minscreen: (320,480,600,995,1200),$maxscreen: (479,599,994,1199,1333),$property: 'height',$values: (100px,80px,106px,124px,132px))
+    &__border_wide
+        @include border($pos: absolute,$w: 631px,$h: 149px,$bor: 6px solid #FFFFFF,$l: 86px,$t: 42px)
+        @include media($minscreen: (480),$maxscreen: (994),$property: 'border',$values: ('4px solid #FFFFFF'))        
+        @include media($minscreen: (320,480,995),$maxscreen: (479,994,1333),$property: 'left',$values: (2px,4%,9%))       
+        @include media($minscreen: (480),$maxscreen: (994),$property: 'top',$values: (4px))
+        @include media($minscreen: (320,480,600,1200,1134,960),$maxscreen: (479,599,994,1333,1199,1133),$property: 'width',$values: (282px,364px,456px,555px,505px,495px))
+        @include media($minscreen: (320,480,600,995,1200),$maxscreen: (479,599,994,1199,1333),$property: 'height',$values: (102px,81px,104px,122px,135px))
+.author
+    position: relative
+    top: 0
+    max-width: 800px
+    width: auto
+    height: 670px
+    &__photo
+        position: absolute
+        left: 54px
+        width: 344px
+        height: 547px
+        @include media($minscreen: (320),$maxscreen: (994),$property: 'left',$values: (4%))        
+        @include media($minscreen: (320,768,995), $maxscreen: (767,994,1133), $property: 'width', $values: (206px,241px,60%))
+        @include media($minscreen: (320,768,995), $maxscreen: (767,994,1133), $property: 'height', $values: (auto,auto,auto))
+    &__border_photo
+        @include border($pos: absolute,$w: 326px,$h: 554px,$bor: 3px solid #3F3F3F,$l: 101px,$t: 21px)
+        @include media($minscreen: (320,768,995), $maxscreen: (767,994,1133), $property: 'width', $values: (195px,228px,55%))
+        @include media($minscreen: (320,768,995), $maxscreen: (767,994,1133), $property: 'height', $values: (328px,388px,68%))
+        @include media($minscreen: (320),$maxscreen: (994),$property: 'left',$values: (8%))             
+    &__name
+        position: absolute
+        left: 61px
+        top: 585px
+        width: 200px
+        font-size: 40px
+        font-weight: 300
+        line-height: 46px
+        @include media($minscreen: (320,768),$maxscreen: (768,994),$property: 'top',$values: (350px,125px))
+        @include media($minscreen: (320,480,768),$maxscreen: (479,768,994),$property: 'left',$values: (20px,calc(100% - 200px),calc(100% - 200px - 4%)))      
+    &__quote
+        position: absolute
+        left: 139.5px
+        top: 640px
+        width: 425px
+        height: 21px
+        line-height: 21px
+        @include media($minscreen: (320),$maxscreen: (479),$property: 'width',$values: (280px))
+        @include media($minscreen: (320),$maxscreen: (479),$property: 'height',$values: (auto)) 
+        @include media($minscreen: (320,768),$maxscreen: (767,994),$property: 'top',$values: (410px,185px))        
+        @include media($minscreen: (320,480,768,995),$maxscreen: (479,767,994,1279),$property: 'left',$values: (calc(100% - 280px),calc(100% - 425px),calc(100% - 425px - 4%),54px))        
+.image
+    position: relative
+    margin-bottom: 112px
+    max-width: 640px
+    width: auto
+    height: 734px
+    @include media($minscreen: (320),$maxscreen: (994),$property: 'display',$values: (none))    
+    &__photo
+        position: absolute
+        top: 99px
+        left: 140px        
+        width: 446px
+        height: 634px
+        @include media($minscreen: (960),$maxscreen: (1439),$property: 'width',$values: (60%))
+        @include media($minscreen: (960),$maxscreen: (1439),$property: 'height',$values: (auto))
+        @include media($minscreen: (960),$maxscreen: (1439),$property: 'left',$values: (calc(140px + 9.5%)))             
+    &__border
+        @include border($pos: absolute,$w: 402px,$h: 620px,$bor: 3px solid #FFFFFF,$l: 98px,$t: 52px)
+        @include media($minscreen: (960,1024,1134),$maxscreen: (1023,1133,1439),$property: 'width',$values: (55%,60%,60%))
+        @include media($minscreen: (960,1024,1134,1280),$maxscreen: (1023,1133,1279,1439),$property: 'height',$values: (60%,64%,70%,72%))
+        @include media($minscreen: (960),$maxscreen: (1439),$property: 'left',$values: (calc(114px + 6.5%)))
+.photo
+    width: 100%
+    height: 100%
+.form
+    position: relative
+    width: 500px
+    height: auto
+    line-height: 120px
+    margin-bottom: 47px
+    @include media($minscreen: (320),$maxscreen: (994),$property: 'margin-bottom',$values: (0))
+    @include media($minscreen: (320,480),$maxscreen: (479,599),$property: 'width',$values: (300px,450px))
+    @include media($minscreen: (320,480,600),$maxscreen: (479,599,994),$property: 'margin-left',$values: (calc((100% - 300px)/2),calc((100% - 450px)/2),calc((100% - 500px)/2)))
+    &__title
+        position: relative
+        width: 295px
+        height: 50px
+        font-size: 40px
+        text-transform: uppercase
+        line-height: 62px
+    &__input
+        width: 100%
+        height: 50px
+        border: none
+        border-bottom: 2px solid #000000
+        font-size: 20px
+        color: #3F3F3F
+        background-color: rgba(0,0,0,0)
+    &__button
+        width: 100%
+        height: 89px
+        font-size: 20px
+        color: #3F3F3F
+        line-height: 95px
+        border: 2px solid #000000
+.address
+    position: relative
+    width: auto
+    min-width: 320px
+    height: 680px
+    margin-bottom: 100px 
+    color: $grayColor
+    display: flex
+    flex-direction: column
+.title
+    position: relative
+    display: inline-block
+    width: 300px
+    height: 175px
+    top: 60px
+    left: calc((100% - 300px)/2)
+    font-size: 500%
+    font-weight: bold
+    text-transform: uppercase
+.title__border
+    @include border($pos: absolute,$w: 312px,$h: 207px,$bor: 6px solid $grayColor,$l: calc((100% - 320px)/2),$t: 40px)    
+.items
+    position: relative
+    width: 430px
+    height: auto
+    top: 130px
+    left: calc((100% - 420px)/2)
+    @include media($minscreen: (320),$maxscreen: (479),$property: 'width',$values: (320px))
+    @include media($minscreen: (320),$maxscreen: (479),$property: 'left',$values: (calc((100% - 320px)/2)))
+.items__border
+    @include border($pos: absolute,$w: 430px,$h: 420px,$bor: 3px solid $grayColor,$l: 5px,$t: 0px) 
+    @include media($minscreen: (320),$maxscreen: (479),$property: 'width',$values: (314px))       
+.item
+    position: relative
+    width: 100%
+    height: 60px 
+    display: flex
+    flex-direction: row
+    text-decoration: none
+.link
+    color: $grayColor
+    display: flex
+    flex-direction: row
+    text-decoration: none
+.icon
+    width: 48px
+    height: 48px
+    margin: auto 12px
+.text
+    width: 100%
+    height: 30px
+    font-size: 24px
+    text-transform: uppercase
+    line-height: 30px
+    margin: auto
+    @include media($minscreen: (320),$maxscreen: (479),$property: 'font-size',$values: (16px))
+.noMargin
+    margin: 0        
+.map
+    position: relative
+    width: calc(100% - 40px)
+    height: auto
+    margin: 0 20px
+.articles
+    width: 100%
+    height: 1423px
+    min-width: 320px
+.article
+    padding-left: 10%
+    padding-top: 3%
+    width: 80%
+    height: 25%
+    color: #D1D1D1
+    font-size: 24px
+    @include media($minscreen: (320),$maxscreen: (479),$property: 'font-size',$values: (16px))
+.footer
+    display: flex
+    flex: 0 0 auto
+    height: 100px
+    justify-content: center
+    &__text
+        position: absolute
+        width: 49px
+        height: 20px
+        margin: 23px auto
+        line-height: 20px

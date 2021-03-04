@@ -1,0 +1,42 @@
+extends templates/template.pug
+block content
+    .column
+        .address
+            h1.title Media Fasad
+            .title__border#title-border
+            .items
+                .item
+                    a.link(href="tel:+73452555555")
+                        img.icon(src="./img/telephone.png" alt="Иконка телефона")
+                        p.text 8(3452)555-555
+                .item
+                    a.link(href="mailto:mediafasad@google.com?subject=Форма%20обратной%20связи&cc=mail@mediafasad.com&body=Приветствую!")
+                        img.icon(src="./img/email.png" alt="Значок электронной почты")
+                        p.text mediafasad@google.com
+                .item
+                    img.icon(src="./img/home.png" alt="Иконка в виде дома")
+                    p.text.noMargin 6, Frunze str., Tyumen, Russia
+                .item
+                    img.icon(src="./img/calendar.png" alt="Иконка в виде календаря")
+                    p.text mon-fri: 10am - 7pm
+                .item
+                    a.link(href="https://instagram.com/mediafasad")
+                        img.icon(src="./img/instagram.png" alt="Лого Инстаграма")
+                        p.text instagram.com/mediafasad
+                .item
+                    a.link(href="https://facebook.com/mediafasad")
+                        img.icon(src="./img/facebook.png" alt="Лого Фейсбука")
+                        p.text facebook.com/mediafasad
+                .item
+                    a.link(href="https://ivk.com/mediafasad")
+                        img.icon(src="./img/vk.png" alt="Лого Вконтакте")
+                        p.text vk.com/mediafasad
+                .items__border#items-border
+        .map
+            script(type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Aa58456d4831518636188f5bea6dc9dfe01c1b3df50d81d15a1f456ebd64cafee&amp;width=100%25&amp;height=600&amp;lang=ru_RU&amp;scroll=true")
+block title
+    - var pageTitle = "Our contacts"
+    meta(name="description" content="страница с контактами")
+    meta(name="robots" content="index, mediafasad, contacts")
+block background
+    .background.brownTop

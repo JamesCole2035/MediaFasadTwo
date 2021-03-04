@@ -6,10 +6,11 @@ const gulp = require('gulp'),
     del = require('del'),
     rename = require('gulp-rename'),
     uglify = require('gulp-uglify'),
-    pipeline = require('readable-stream'),
+    pipeline = require('readable-stream').pipeline,
     imagemin = require('gulp-imagemin'),
     browserSync = require('browser-sync'),
     cssnano = require('gulp-cssnano'),
+    mq = require('gulp-group-css-media-queries'),
     concat = require('gulp-concat');
 gulp.task('hello', async function() {
     console.log("Hi!");
@@ -38,6 +39,7 @@ gulp.task('sass', function() {
         .pipe(autoprefixer(['last 16 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true }))
         .pipe(concat('styles.css'))
         .pipe(sourcemaps.init())
+        .pipe(mq())
         .pipe(cssnano())
         .pipe(rename({suffix: '.min'}))
         .pipe(sourcemaps.write('.'))
@@ -66,8 +68,10 @@ gulp.task('images', function() {
 gulp.task('clean', async function() {
 	return del.sync('dist'); // Удаляем папку dist перед сборкой
 });
+gulp.task('build', gulp.series('clean', gulp.parallel('pug','images','sass','script')));
 gulp.task('watch', function() {
-	gulp.watch('src/sass/*.s+(c|a)ss', gulp.parallel('sass'));
-    gulp.watch('src/pug/*.pug', gulp.parallel('pug'));
+	gulp.watch('src/sass/*.s+(c|a)ss', gulp.parallel('sass'))
+    gulp.watch('src/pug/*.pug', gulp.parallel('pug'))
 });
+gulp.task('dev', gulp.series('build', 'watch'));
 gulp.task('default', gulp.parallel('sass', 'pug', 'browser', 'images', 'script', 'watch'));
